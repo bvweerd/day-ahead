@@ -59,10 +59,6 @@ COPY requirements.txt /tmp/
 RUN pip3 install uv
 RUN uv pip install -r /tmp/requirements.txt
 COPY run /root/dao/prog/
-
-RUN groupmod -g 1000 users \
-    && useradd -u 911 -U app \
-    && usermod -G users app
     
 EXPOSE 5000
 WORKDIR /root/dao/prog
