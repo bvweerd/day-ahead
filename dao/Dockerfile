@@ -14,6 +14,10 @@ RUN apt-get upgrade -y
 RUN apt-get install -y pkgconf nano file mariadb-client inotify-tools procps gunicorn libmariadb3 libmariadb-dev libjpeg-dev uidmap
 RUN apt-get install -y postgresql-client sqlite3 gcc
 
+RUN groupmod -g 1000 users \
+    && useradd -u 911 -U app \
+    && usermod -G users app
+    
 # Copy software for add-on
 RUN mkdir /root/dao
 COPY __init__.py /root/dao
