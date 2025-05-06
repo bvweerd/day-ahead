@@ -1,0 +1,11 @@
+#!/bin/sh
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "main" ]; then
+  if [ "$(git diff --exit-code config.yaml)" = "1" ]; then
+    echo "Cannot change config.yaml file in main branch. Aborting commit..."
+    echo "Unstage config.yaml to commit."
+    exit 1
+  fi
+fi
